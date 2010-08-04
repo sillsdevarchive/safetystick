@@ -57,6 +57,21 @@ rootFolder= c:\foo\bar #blah"))
 		}
 
 		[Test]
+		public void CreateGroups_FoundFolderOverridesMissingFolder()
+		{
+			using (var f = FileFromContents(
+							@"
+[James]
+rootFolder= c:\notreallythere\bar
+rootFolder= c:\"))
+			{
+				var reader = new GroupIniFileReader(f.Path);
+				var groups = reader.CreateGroups().ToArray();
+				Assert.That(groups[0].RootFolder, Is.EqualTo(@"c:\"));
+			}
+		}
+
+		[Test]
 		public void CreateGroups_MyDocumentsBasedRootFolder_Converted()
 		{
 			using (var f = FileFromContents(
@@ -70,9 +85,8 @@ rootFolder= $MyDocuments$"))
 			}
 		}
 
-
 		[Test]
-		public void CreateGroups_RegistryKey_Converted()
+		public void CreateGroups_RegistryKeyWithExplicitValueSpecified_Converted()
 		{
 			using (var f = FileFromContents(
 							@"[ARegistryExample]
