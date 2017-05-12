@@ -1,0 +1,12 @@
+_ReSharper*
+*/obj/*
+*/bin/*
+output/*
+build/bootstraper/dotNetInstaller 1.10/Bin/other/
+build/bootstraper/dotNetInstaller 1.10/Samples/
+build/bootstraper/dotNetInstaller 1.10/Doc/
+build/bootstraper/dotNetInstaller 1.10/WhatsNew.html
+*.pdb
+myWorkSafe.suo
+*ReSharper.*
+*.cache
